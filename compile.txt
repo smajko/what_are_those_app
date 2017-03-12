@@ -1,0 +1,2 @@
+files=MainActivity.java,AndroidManifest.xml,activity_main.xml,strings.xml
+type=android
