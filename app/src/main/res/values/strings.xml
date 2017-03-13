@@ -8,5 +8,12 @@
     <string name="takePict">Start camera</string>
     <string name="skip">Skip </string>
     <string name="next">Next</string>
-    
+
+    <string-array name="showGuidelinesArray">
+        <item>Off</item>
+        <item>On Touch</item>
+        <item>On</item>
+    </string-array>
+
+
 </resources>

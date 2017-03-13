@@ -8,7 +8,11 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ public class MainActivity extends Activity {
 
 	private ImageView imgPreview;
 	private Button btnCapturePicture;
+	private String outputFilePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class MainActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// 1. We'll store photos in a file. We set the file name here.
-		String outputFilePath = Environment.getExternalStorageDirectory()
+		outputFilePath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/myimage.jpg";
 		fileUri = Uri.fromFile(new File(outputFilePath));
 
@@ -84,6 +89,9 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (resultCode == RESULT_OK) {
+			Intent myIntent = new Intent(MainActivity.this, CropActivity.class);
+			myIntent.putExtra("path",outputFilePath);
+			MainActivity.this.startActivity(myIntent);
 			//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			// 10. We've successfully captured the image. Now we'll show it in
 			// the image view created earlier
@@ -117,7 +125,7 @@ public class MainActivity extends Activity {
 				}
 
 				// 14. Now we get bitmap from the photograph and apply the rotation matrix above
-				
+
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				// down-sizing image as it can throw OutOfMemory Exception for
 				// larger images
@@ -130,13 +138,9 @@ public class MainActivity extends Activity {
 						bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
 
+
 				//15. Now display the image on the UI
-				imgPreview.setImageBitmap(rotatedBitmap);
-
-				//Don't allow re-orientation of screen if photo taken
-				//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-				//imgPreview.setImageBitmap(bitmap);
-
+				//imgPreview.setImageBitmap(rotatedBitmap);
 
 				final Button testButton = (Button) findViewById(R.id.btnNext);
 				testButton.setText("Next");
