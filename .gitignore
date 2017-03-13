@@ -8,3 +8,5 @@ Dependency/*
 /app/.idea/*
 /app/.svn/*
 /app/local.properties
+/app/build/
+/.gradle/
