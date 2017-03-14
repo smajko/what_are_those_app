@@ -1,51 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:id="@+id/scrollview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AgeActivity">
 
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:onClick="next" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".AgeActivity">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Gender:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RadioButton android:id="@+id/male"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Male" />
-        <RadioButton android:id="@+id/female"
-            android:layout_width="wrap_content"
+            android:text="Next"
+            android:onClick="next" />
+
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Female" />
-    </RadioGroup>
+            android:text="Gender:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Age:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:inputType="number"
-        android:textIsSelectable="true" />
+            <RadioButton android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+            <RadioButton android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+        </RadioGroup>
 
-</LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Age:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="32dp" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:inputType="number"
+            android:focusableInTouchMode="true"
+            android:textIsSelectable="true" />
+
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Have you had this condition before?"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="32dp" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+            <RadioButton android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="How long have you had the condition?"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="32dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <NumberPicker
+                android:id="@+id/numberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <NumberPicker
+                android:id="@+id/stringPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@+id/numberPicker"
+                android:layout_toRightOf="@+id/numberPicker" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
