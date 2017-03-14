@@ -56,7 +56,6 @@ public class CropActivity extends Activity {
         });
         Intent intent = getIntent();
         String path = intent.getStringExtra("path");
-        cropButton.setText("Crop");
 
         try {
             Matrix matrix = new Matrix();

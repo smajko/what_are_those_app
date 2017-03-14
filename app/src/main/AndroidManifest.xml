@@ -4,9 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-
     <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -16,7 +14,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="org.smajko.watapp.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/main_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,17 +24,17 @@
 
         <activity
             android:name="org.smajko.watapp.AgeActivity"
-            android:label="title_age_activity" >
+            android:label="@string/age_title" >
         </activity>
 
         <activity
             android:name="org.smajko.watapp.SymptomActivity"
-            android:label="title_symptom_activity" >
+            android:label="@string/symptom_title" >
         </activity>
 
         <activity
             android:name="org.smajko.watapp.CropActivity"
-            android:label="title_crop_activity" >
+            android:label="@string/crop_title" >
         </activity>
     </application>
 

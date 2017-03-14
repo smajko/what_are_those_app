@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="title"
+            android:text="@string/crop_title"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
@@ -167,7 +167,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/content_padding"
             android:minWidth="120dp"
-            android:text="crop"
+            android:text="@string/crop_button"
             android:textColor="#33B5E5"
             android:textSize="20sp"/>
 
@@ -178,7 +178,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/content_padding"
             android:minWidth="120dp"
-            android:text="Done"
+            android:text="@string/done_button"
             android:textColor="#33B5E5"
             android:textSize="20sp"/>
 

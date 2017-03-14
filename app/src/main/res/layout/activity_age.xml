@@ -20,13 +20,13 @@
             android:id="@+id/btnNext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:text="@string/next_button"
             android:onClick="next" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Gender:"
+            android:text="@string/gender"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,20 +37,17 @@
             <RadioButton android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male" />
+                android:text="@string/male" />
             <RadioButton android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female" />
+                android:text="@string/female" />
         </RadioGroup>
-
-
-
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Age:"
+            android:text="@string/age"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginTop="32dp" />
 
@@ -63,13 +60,10 @@
             android:focusableInTouchMode="true"
             android:textIsSelectable="true" />
 
-
-
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Have you had this condition before?"
+            android:text="@string/question1"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginTop="32dp" />
 
@@ -81,17 +75,17 @@
             <RadioButton android:id="@+id/yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes" />
+                android:text="@string/yes" />
             <RadioButton android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No" />
+                android:text="@string/no" />
         </RadioGroup>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="How long have you had the condition?"
+            android:text="@string/question2"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginTop="32dp" />
 
