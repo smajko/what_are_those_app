@@ -14,14 +14,6 @@ public class AgeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
         final EditText ageEdit = (EditText) findViewById(R.id.age);
-        /*ageEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                ageEdit.setCursorVisible(true);
-            }
-        });*/
 
         ageEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -59,6 +51,7 @@ public class AgeActivity extends Activity {
     }
 
     public void next(View view){
+        hideKeyboard(view);
         startActivity(new Intent(this, SymptomActivity.class));
     }
 }

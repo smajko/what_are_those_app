@@ -62,11 +62,11 @@ public class CropActivity extends Activity {
             Matrix matrix = new Matrix();
             ExifInterface ei = new ExifInterface(path);
 
-            // 12. Get orientation of the photograph
+            // Get orientation of the photograph
             int orientation = ei.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);
-            // 13. In case image is rotated, we rotate it back
+            // In case image is rotated, we rotate it back
             switch (orientation) {
 
                 case ExifInterface.ORIENTATION_ROTATE_90:
@@ -83,7 +83,7 @@ public class CropActivity extends Activity {
                     break;
             }
 
-            // 14. Now we get bitmap from the photograph and apply the rotation matrix above
+            // Now we get bitmap from the photograph and apply the rotation matrix above
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             // down-sizing image as it can throw OutOfMemory Exception for
