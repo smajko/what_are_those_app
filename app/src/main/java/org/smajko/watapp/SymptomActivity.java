@@ -7,8 +7,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Button;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Toast;
-
 
 public class SymptomActivity extends Activity {
     @Override
@@ -34,15 +32,13 @@ public class SymptomActivity extends Activity {
         }
 
         Button btn = new Button(this);
-        btn.setText("Get Results");
+        btn.setText("Done");
         btn.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         ll.addView(btn);
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Toast.makeText(SymptomActivity.this, "Endpoint not implemented",
-                        Toast.LENGTH_LONG).show();
-                //startActivity(new Intent(this, SymptomActivity.class));
+                finish();
             }
         });
     }

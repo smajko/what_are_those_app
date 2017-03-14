@@ -20,8 +20,8 @@
             android:id="@+id/btnNext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/next_button"
-            android:onClick="next" />
+            android:text="@string/done_button"
+            android:onClick="done" />
 
         <TextView
             android:layout_width="fill_parent"

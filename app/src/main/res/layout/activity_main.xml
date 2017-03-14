@@ -5,17 +5,28 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".MainActivity" >
-            <Button
-                android:id="@+id/btnCapturePicture"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/takePict" />
+    <Button
+        android:id="@+id/btnCameraActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/takePict" />
 
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/skip"
-                android:onClick="next" />
-  
+    <Button
+        android:id="@+id/btnAgeActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/information" />
+
+    <Button
+        android:id="@+id/btnSymptomActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/symptoms" />
+
+    <Button
+        android:id="@+id/btnResults"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/results" />
+
 </LinearLayout>

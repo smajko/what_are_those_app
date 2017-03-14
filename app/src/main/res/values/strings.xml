@@ -3,16 +3,18 @@
     <!-- App -->
     <string name="app_name">WatApp</string>
     <string name="action_settings">Settings</string>
+    <string name="done_button">Done</string>
 
     <!-- MainActivity -->
     <string name="main_title">Welcome</string>
     <string name="takePict">Start camera</string>
-    <string name="skip">Skip</string>
+    <string name="results">Get Results</string>
+    <string name="symptoms">Enter Symptoms</string>
+    <string name="information">Enter Information</string>
 
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>
     <string name="crop_button">Crop</string>
-    <string name="done_button">Done</string>
 
     <string-array name="showGuidelinesArray">
         <item>Off</item>
@@ -22,7 +24,6 @@
 
     <!-- AgeActivity -->
     <string name="age_title">Enter information</string>
-    <string name="next_button">Next</string>
     <string name="gender">Gender:</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
