@@ -1,4 +1,4 @@
-package org.turntotech.photocapture;
+package org.smajko.watapp;
 
 import android.app.Activity;
 import android.content.Intent;

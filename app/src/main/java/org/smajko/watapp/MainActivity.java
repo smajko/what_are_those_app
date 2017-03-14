@@ -1,4 +1,4 @@
-package org.turntotech.photocapture;
+package org.smajko.watapp;
 
 import java.io.File;
 
