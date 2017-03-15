@@ -1,7 +1,9 @@
 package org.smajko.watapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,17 +14,16 @@ import android.widget.Toast;
 
 public class SymptomActivity extends Activity {
     CheckBox[] cbs = new CheckBox[8];
+    String sb;
+    String symptoms[] = {"Itchiness", "Redness", "Bumps", "Tenderness", "Hotness", "Burning", "Fever", "Sneezing"};;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_symptoms);
 
-
         //Programmatically set style due to dynamic layout/instantiation of symptom checkboxes
         final LinearLayout ll = (LinearLayout) findViewById(R.id.linear_main);
-
-        String[] symptoms = {"Itchiness", "Redness", "Bumps", "Tenderness", "Hotness", "Burning", "Fever", "Sneezing"};
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(200,200);
         for (int i = 0; i < 8; i++)
@@ -52,10 +53,12 @@ public class SymptomActivity extends Activity {
         for (int i = 0; i < 8; i++){
             if (cbs[i].isChecked()){
                 symptom = true;
+                sb += symptoms[i];
+                sb += ",";
             }
         }
-
         if (symptom){
+            intent.putExtra("symptoms",sb);
             setResult(RESULT_OK, intent);
         } else {
             Toast.makeText(SymptomActivity.this, "No symptoms selected!",

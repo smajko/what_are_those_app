@@ -21,6 +21,19 @@ public class MainActivity extends Activity {
 	static final int INFO_RESULT_CODE = 2;
 	static final int SYMPTOM_RESULT_CODE = 3;
 
+	/********************************
+	 * 	Params to parse to endpoint
+	 ********************************/
+
+			String symptoms;
+			String gender;
+			int age;
+			int days;
+			boolean reoccurring;
+
+	/********************************/
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +95,12 @@ public class MainActivity extends Activity {
 					final TextView tv2 = (TextView) findViewById(R.id.tvAgeActivity);
 					cb2.setChecked(true);
 					tv2.setTextColor(Color.parseColor("#40E42F"));
+
+					Intent extras = this.getIntent();
+					gender = extras.getStringExtra("gender");
+					age = extras.getIntExtra("age",0);
+					days = extras.getIntExtra("days",0);
+					reoccurring = extras.getBooleanExtra("reoccurring",true);
 				}
 				break;
 			case SYMPTOM_RESULT_CODE:
@@ -90,6 +109,9 @@ public class MainActivity extends Activity {
 					final TextView tv3 = (TextView) findViewById(R.id.tvSymptomActivity);
 					cb3.setChecked(true);
 					tv3.setTextColor(Color.parseColor("#40E42F"));
+
+					Intent extras = this.getIntent();
+					symptoms = extras.getStringExtra("symptoms");
 				}
 				break;
 		}

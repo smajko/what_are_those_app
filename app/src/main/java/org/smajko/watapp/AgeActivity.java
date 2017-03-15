@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -27,7 +28,6 @@ public class AgeActivity extends Activity {
                     showKeyboard(v);
                     ageEdit.setCursorVisible(true);
                 }
-
             }
         });
 
@@ -64,6 +64,12 @@ public class AgeActivity extends Activity {
         RadioGroup rg = (RadioGroup)findViewById(R.id.gender);
         RadioGroup rg2 = (RadioGroup)findViewById(R.id.reoccur);
 
+        RadioButton rb1 = (RadioButton)findViewById(R.id.male);
+        RadioButton rb2 = (RadioButton)findViewById(R.id.yes);
+
+        NumberPicker numberPicker = (NumberPicker) findViewById(R.id.numberPicker);
+        NumberPicker stringPicker = (NumberPicker) findViewById(R.id.stringPicker);
+
         Intent intent = new Intent();
 
         if (checkEmpty.matches("")){
@@ -78,8 +84,33 @@ public class AgeActivity extends Activity {
             Toast.makeText(AgeActivity.this, "Recurrence not selected!",
                     Toast.LENGTH_LONG).show();
             setResult(RESULT_CANCELED, intent);
-        } else
+        } else {
+            //age
+            intent.putExtra("age",Integer.parseInt(checkEmpty));
+
+            //gender
+            if (rb1.isChecked())
+                intent.putExtra("gender","male");
+            else
+                intent.putExtra("gender","female");
+
+            //reoccurring
+            if (rb2.isChecked())
+                intent.putExtra("reoccurring",true);
+            else
+                intent.putExtra("reoccurring",false);
+
+            //days
+            int days = numberPicker.getValue();
+            int date = stringPicker.getValue();
+            if (date == 2)
+                days *= 28; //months selected
+            else if (date == 3)
+                days *= 365; //years selected
+            intent.putExtra("days",days);
+
             setResult(RESULT_OK, intent);
+        }
 
         finish();
     }
