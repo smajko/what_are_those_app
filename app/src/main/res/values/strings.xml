@@ -11,6 +11,12 @@
     <string name="results">Get Results</string>
     <string name="symptoms">Enter Symptoms</string>
     <string name="information">Enter Information</string>
+    <string name="progressCamera">Camera progress:</string>
+    <string name="progressAge">Information progress:</string>
+    <string name="progressSymptom">Symptom progress:</string>
+    <string name="progress">Progress:</string>
+
+
 
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>

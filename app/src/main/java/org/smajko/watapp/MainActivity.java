@@ -3,16 +3,23 @@ package org.smajko.watapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private Uri fileUri; // file URI to store image/video
 	private String outputFilePath;
+
+	static final int CAMERA_RESULT_CODE = 1;
+	static final int INFO_RESULT_CODE = 2;
+	static final int SYMPTOM_RESULT_CODE = 3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +32,16 @@ public class MainActivity extends Activity {
 		btnCameraActivity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainActivity.this, CropActivity.class));
+				Intent intent = new Intent(MainActivity.this, CropActivity.class);
+				startActivityForResult(intent, CAMERA_RESULT_CODE);
 			}
 		});
 
 		final Button btnAgeActivity = (Button) findViewById(R.id.btnAgeActivity);
 		btnAgeActivity.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				startActivity(new Intent(MainActivity.this, AgeActivity.class));
+				Intent intent = new Intent(MainActivity.this, AgeActivity.class);
+				startActivityForResult(intent, INFO_RESULT_CODE);
 			}
 		});
 
@@ -40,7 +49,8 @@ public class MainActivity extends Activity {
 		btnSymptomActivity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainActivity.this, SymptomActivity.class));
+				Intent intent = new Intent(MainActivity.this, SymptomActivity.class);
+				startActivityForResult(intent, SYMPTOM_RESULT_CODE);
 			}
 		});
 
@@ -52,6 +62,36 @@ public class MainActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 		});
+	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//setContentView(R.layout.activity_main);
+		switch (requestCode) {
+			case CAMERA_RESULT_CODE:
+				if (resultCode == RESULT_OK) {
+					final CheckBox cb1 = (CheckBox) findViewById(R.id.cbCameraActivity);
+					final TextView tv1 = (TextView) findViewById(R.id.tvCameraActivity);
+					cb1.setChecked(true);
+					tv1.setTextColor(Color.parseColor("#40E42F"));
+				}
+				break;
+			case INFO_RESULT_CODE:
+				if (resultCode == RESULT_OK) {
+					final CheckBox cb2 = (CheckBox) findViewById(R.id.cbAgeActivity);
+					final TextView tv2 = (TextView) findViewById(R.id.tvAgeActivity);
+					cb2.setChecked(true);
+					tv2.setTextColor(Color.parseColor("#40E42F"));
+				}
+				break;
+			case SYMPTOM_RESULT_CODE:
+				if (resultCode == RESULT_OK) {
+					final CheckBox cb3 = (CheckBox) findViewById(R.id.cbSymptomActivity);
+					final TextView tv3 = (TextView) findViewById(R.id.tvSymptomActivity);
+					cb3.setChecked(true);
+					tv3.setTextColor(Color.parseColor("#40E42F"));
+				}
+				break;
+		}
 	}
 }

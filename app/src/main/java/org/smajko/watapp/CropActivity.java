@@ -44,7 +44,6 @@ public class CropActivity extends Activity {
         fileUri = Uri.fromFile(new File(outputFilePath));
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_crop);
-        Intent intent = getIntent();
         cropped = false;
         captureImage();
     }

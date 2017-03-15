@@ -5,28 +5,128 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".MainActivity" >
+
     <Button
         android:id="@+id/btnCameraActivity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/takePict" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView android:id="@+id/tvCameraActivity"
+            android:textColor="#BA3232"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/progress"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="16dp" />
+
+        <CheckBox android:id="@+id/cbCameraActivity"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:scaleX="1.70"
+            android:scaleY="1.70"
+            android:layout_toEndOf="@+id/tvCameraActivity"
+            android:layout_toRightOf="@+id/tvCameraActivity" />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btnAgeActivity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/information" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView android:id="@+id/tvAgeActivity"
+            android:textColor="#BA3232"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/progress"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="16dp" />
+
+        <CheckBox android:id="@+id/cbAgeActivity"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:scaleX="1.70"
+            android:scaleY="1.70"
+            android:layout_toEndOf="@+id/tvAgeActivity"
+            android:layout_toRightOf="@+id/tvAgeActivity" />
+
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnSymptomActivity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/symptoms" />
 
-    <Button
-        android:id="@+id/btnResults"
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/results" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView android:id="@+id/tvSymptomActivity"
+            android:textColor="#BA3232"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/progress"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="16dp" />
+
+        <CheckBox android:id="@+id/cbSymptomActivity"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:scaleX="1.70"
+            android:scaleY="1.70"
+            android:layout_toEndOf="@+id/tvSymptomActivity"
+            android:layout_toRightOf="@+id/tvSymptomActivity" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnResults"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/results" />
+
+        </LinearLayout>
 
 </LinearLayout>
