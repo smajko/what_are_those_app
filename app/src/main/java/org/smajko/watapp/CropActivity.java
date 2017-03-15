@@ -208,6 +208,8 @@ public class CropActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            finish();
         }
     }
 
