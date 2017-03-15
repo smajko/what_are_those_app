@@ -22,6 +22,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.edmodo.cropper.CropImageView;
@@ -217,6 +218,8 @@ public class CropActivity extends Activity {
             setResult(RESULT_OK, intent);
         } else {
             setResult(RESULT_CANCELED, intent);
+            Toast.makeText(CropActivity.this, "Picture not cropped!",
+                    Toast.LENGTH_LONG).show();
         }
         finish();
     }
@@ -250,7 +253,8 @@ public class CropActivity extends Activity {
             startActivityForResult(intent, 1);
 
         } else {
-            android.util.Log.i("CAMERA_APP", "No camera found");
+            Toast.makeText(CropActivity.this, "Camera not found!",
+                    Toast.LENGTH_LONG).show();
             finish();
         }
     }

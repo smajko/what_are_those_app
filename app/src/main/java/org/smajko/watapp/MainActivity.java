@@ -3,12 +3,16 @@ package org.smajko.watapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+	private Uri fileUri; // file URI to store image/video
+	private String outputFilePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

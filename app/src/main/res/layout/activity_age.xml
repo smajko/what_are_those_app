@@ -30,6 +30,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gender"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -68,6 +69,7 @@
             android:layout_marginTop="32dp" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/reoccur"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
