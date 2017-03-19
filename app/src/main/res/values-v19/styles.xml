@@ -1,0 +1,11 @@
+<resources>
+
+    <!--
+        Base application theme for API 19+.
+    -->
+    <style name="FullscreenTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+</resources>
