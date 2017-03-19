@@ -1,9 +1,7 @@
 package org.smajko.watapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -15,7 +13,7 @@ import android.widget.Toast;
 public class SymptomActivity extends Activity {
     CheckBox[] cbs = new CheckBox[8];
     String sb;
-    String symptoms[] = {"Itchiness", "Redness", "Bumps", "Tenderness", "Hotness", "Burning", "Fever", "Sneezing"};;
+    String symptoms[] = {"Itchiness", "Redness", "Bumps", "Tenderness", "Hotness", "Burning", "Fever", "Sneezing"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class SymptomActivity extends Activity {
         }
 
         Button btn = new Button(this);
-        btn.setText("Done");
+        btn.setText(R.string.done_button);
         btn.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         ll.addView(btn);
 

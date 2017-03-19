@@ -6,7 +6,7 @@
     <string name="done_button">Done</string>
 
     <!-- MainActivity -->
-    <string name="main_title">Welcome</string>
+    <string name="main_title">Main Screen</string>
     <string name="takePict">Start camera</string>
     <string name="results">Get Results</string>
     <string name="symptoms">Enter Symptoms</string>
@@ -16,7 +16,8 @@
     <string name="progressSymptom">Symptom progress:</string>
     <string name="progress">Progress:</string>
 
-
+    <!-- IntroActivity -->
+    <string name="app_intro">Welcome!</string>
 
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>

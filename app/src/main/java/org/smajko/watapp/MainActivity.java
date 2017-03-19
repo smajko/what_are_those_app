@@ -25,11 +25,11 @@ public class MainActivity extends Activity {
 	 * 	Params to parse to endpoint
 	 ********************************/
 
-			String symptoms;
-			String gender;
-			int age;
-			int days;
-			boolean reoccurring;
+	String symptoms;
+	String gender;
+	int age;
+	int days;
+	boolean reoccurring;
 
 	/********************************/
 
@@ -37,6 +37,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+		startActivity(intent);
+
 		setContentView(R.layout.activity_main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
