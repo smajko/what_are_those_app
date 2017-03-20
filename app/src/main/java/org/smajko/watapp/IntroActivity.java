@@ -19,9 +19,9 @@ public class IntroActivity extends AppIntro {
         //addSlide(thirdFragment);
         //addSlide(fourthFragment);
 
-        addSlide(AppIntroFragment.newInstance("Welcome to WatApp", "Symptom checker made easy and intuitive", R.drawable.ic_launcher, Color.TRANSPARENT));
-        addSlide(AppIntroFragment.newInstance("Having symptoms but don't know what they mean?", "Just give us some information, and we will try to give an accurate diagnosis", R.drawable.ic_launcher, Color.TRANSPARENT));
-        addSlide(AppIntroFragment.newInstance("Enjoy!", "GET STARTED", R.drawable.ic_launcher, Color.TRANSPARENT));
+        addSlide(AppIntroFragment.newInstance("Welcome to WatApp", "Symptom checker made easy and intuitive", R.drawable.ic_screen1, Color.TRANSPARENT));
+        addSlide(AppIntroFragment.newInstance("Having symptoms but don't know what they mean?", "Just give us some information, and we will try to give an accurate diagnosis", R.drawable.ic_screen1, Color.TRANSPARENT));
+        addSlide(AppIntroFragment.newInstance("Enjoy!", "GET STARTED", R.drawable.ic_screen1, Color.TRANSPARENT));
 
         // Override bar/separator color.
         setBarColor(Color.parseColor("#000000"));
