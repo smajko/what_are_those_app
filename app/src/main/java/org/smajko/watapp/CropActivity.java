@@ -191,9 +191,14 @@ public class CropActivity extends Activity {
                 cropButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final Bitmap croppedImage = cropImageView.getCroppedImage();
-                        croppedImageView.setImageBitmap(croppedImage);
-                        setPicture(croppedImage);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Bitmap croppedImage = cropImageView.getCroppedImage();
+                                croppedImageView.setImageBitmap(croppedImage);
+                                setPicture(croppedImage);
+                            }
+                        });
                     }
                 });
 
