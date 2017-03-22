@@ -22,12 +22,8 @@
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>
     <string name="crop_button">Crop</string>
-
-    <string-array name="showGuidelinesArray">
-        <item>Off</item>
-        <item>On Touch</item>
-        <item>On</item>
-    </string-array>
+    <string name="cropAbove">Please crop the image above, fitting the entire skin condition in the box and pressing "crop".</string>
+    <string name="cropBelow">If the image below is satisfactory, press "done".</string>
 
     <!-- AgeActivity -->
     <string name="age_title">Enter information</string>
