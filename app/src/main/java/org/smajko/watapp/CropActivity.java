@@ -59,7 +59,8 @@ public class CropActivity extends Activity {
                 final Button doneButton = (Button) findViewById(R.id.Button_done);
 
                 // Initialize fixed aspect ratio
-                cropImageView.setAspectRatio(1, 1);
+                cropImageView.setFixedAspectRatio(true);
+                cropImageView.setAspectRatio(1,1);
 
                 try {
                     Matrix matrix = new Matrix();
