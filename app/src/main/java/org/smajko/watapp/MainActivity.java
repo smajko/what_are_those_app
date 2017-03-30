@@ -23,6 +23,10 @@ public class MainActivity extends Activity {
 	static final int CAMERA_RESULT_CODE = 1;
 	static final int INFO_RESULT_CODE = 2;
 	static final int SYMPTOM_RESULT_CODE = 3;
+	static final int INTRO_RESULT_CODE = 4;
+	static final int PERMISSION_RESULT_CODE = 5;
+
+	boolean start = true;
 
 	/********************************
 	 * 	  Params for json request
@@ -67,7 +71,7 @@ public class MainActivity extends Activity {
 		verifyStoragePermissions(this);
 
 		Intent intent = new Intent(MainActivity.this, IntroActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, INTRO_RESULT_CODE);
 
 		setContentView(R.layout.activity_main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -149,18 +153,23 @@ public class MainActivity extends Activity {
 		});
 	}
 
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		//setContentView(R.layout.activity_main);
+		Intent intent;
 		switch (requestCode) {
-			case CAMERA_RESULT_CODE:
-				if (resultCode == RESULT_OK) {
-					final CheckBox cb1 = (CheckBox) findViewById(R.id.cbCameraActivity);
-					final TextView tv1 = (TextView) findViewById(R.id.tvCameraActivity);
-					cb1.setChecked(true);
-					tv1.setTextColor(Color.parseColor("#40E42F"));
-				}
+			/*************************************************
+			 * 	   Start information activity after intro
+			 *************************************************/
+			case INTRO_RESULT_CODE:
+				intent = new Intent(MainActivity.this, AgeActivity.class);
+				startActivityForResult(intent, INFO_RESULT_CODE);
 				break;
+
+			/*************************************************
+			 * 	       Information activity result
+			 *************************************************/
 			case INFO_RESULT_CODE:
 				if (resultCode == RESULT_OK) {
 					final CheckBox cb2 = (CheckBox) findViewById(R.id.cbAgeActivity);
@@ -174,7 +183,52 @@ public class MainActivity extends Activity {
 					days = extras.getIntExtra("days",0);
 					reoccurring = extras.getBooleanExtra("reoccurring",true);
 				}
+				/** On app start, automatically start camera permission activity after writing results **/
+				if (start) {
+					intent = new Intent(MainActivity.this, CameraActivity.class);
+					intent.putExtra("start",start);
+					startActivityForResult(intent, PERMISSION_RESULT_CODE);
+				}
 				break;
+
+			/*************************************************
+			 * 	      Camera permission activity result
+			 *************************************************/
+			case PERMISSION_RESULT_CODE:
+				/** Start camera crop activity after permitted **/
+				if (resultCode == RESULT_OK){
+					intent = new Intent(MainActivity.this, CropActivity.class);
+					startActivityForResult(intent, CAMERA_RESULT_CODE);
+				}
+				/** Start symptom activity after not permitted **/
+				else {
+					intent = new Intent(MainActivity.this, SymptomActivity.class);
+					intent.putExtra("start",start);
+					startActivityForResult(intent, SYMPTOM_RESULT_CODE);
+				}
+				break;
+
+			/*************************************************
+			 * 	         Camera crop activity result
+			 *************************************************/
+			case CAMERA_RESULT_CODE:
+				if (resultCode == RESULT_OK) {
+					final CheckBox cb1 = (CheckBox) findViewById(R.id.cbCameraActivity);
+					final TextView tv1 = (TextView) findViewById(R.id.tvCameraActivity);
+					cb1.setChecked(true);
+					tv1.setTextColor(Color.parseColor("#40E42F"));
+				}
+				/** On app start, automatically start symptom activity after writing results **/
+				if (start) {
+					intent = new Intent(MainActivity.this, SymptomActivity.class);
+					intent.putExtra("start",start);
+					startActivityForResult(intent, SYMPTOM_RESULT_CODE);
+				}
+				break;
+
+			/*************************************************
+			 * 	          Symptom activity result
+			 *************************************************/
 			case SYMPTOM_RESULT_CODE:
 				if (resultCode == RESULT_OK) {
 					final CheckBox cb3 = (CheckBox) findViewById(R.id.cbSymptomActivity);
@@ -184,6 +238,9 @@ public class MainActivity extends Activity {
 
 					Intent extras = this.getIntent();
 					symptoms = extras.getStringExtra("symptoms");
+				}
+				if (start) {
+					start = false;
 				}
 				break;
 		}

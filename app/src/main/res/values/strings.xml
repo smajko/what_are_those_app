@@ -21,6 +21,9 @@
     <!-- IntroActivity -->
     <string name="app_intro">Welcome!</string>
 
+    <!-- CameraActivity -->
+    <string name="camera">Is your symptom visible?</string>
+
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>
     <string name="crop_button">Crop</string>

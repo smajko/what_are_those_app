@@ -37,6 +37,11 @@
         </activity>
 
         <activity
+            android:name="org.smajko.watapp.CameraActivity"
+            android:label="@string/crop_title" >
+        </activity>
+
+        <activity
             android:name="org.smajko.watapp.CropActivity"
             android:label="@string/crop_title" >
         </activity>
