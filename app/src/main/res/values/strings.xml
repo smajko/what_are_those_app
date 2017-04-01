@@ -6,6 +6,8 @@
     <string name="done_button">Done</string>
     <string name="next_button">Next</string>
     <string name="prev_button">Previous</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- MainActivity -->
     <string name="main_title">Main Screen</string>
@@ -23,27 +25,26 @@
 
     <!-- CameraActivity -->
     <string name="camera">Is your symptom visible?</string>
+    <string name="cameraYes">Would you like to take a picture\n for a more accurate diagnosis?</string>
 
     <!-- CropActivity -->
     <string name="crop_title">Crop image</string>
     <string name="crop_button">Crop</string>
-    <string name="cropAbove">Please crop the image above, fitting the entire skin condition in the box and pressing "crop".</string>
-    <string name="cropBelow">If the image below is satisfactory, press "done".</string>
+    <string name="cropAbove">Please crop the image above, fitting the entire skin condition in the box and pressing CROP.</string>
+    <string name="cropBelow">If the image below is satisfactory, press DONE.</string>
 
     <!-- AgeActivity -->
     <string name="age_title">Enter information</string>
     <string name="gender">Gender:</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="age">Age</string>
+    <string name="age">Age:</string>
     <string name="question1">Have you had this condition before?</string>
     <string name="question2">How long have you had the condition?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
 
     <!-- SymptomActivity -->
     <string name="symptom_title">Symptoms</string>
-    <string name="subtitleSelect">Select Symptoms:</string>
+    <string name="subtitleSelect">Select Symptoms</string>
 
 
 </resources>

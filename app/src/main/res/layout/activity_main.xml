@@ -28,6 +28,7 @@
             android:layout_marginTop="16dp" />
 
         <CheckBox android:id="@+id/cbCameraActivity"
+            android:theme="@style/checkBoxStyle"
             android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +65,7 @@
             android:layout_marginTop="16dp" />
 
         <CheckBox android:id="@+id/cbAgeActivity"
+            android:theme="@style/checkBoxStyle"
             android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,6 +103,7 @@
             android:layout_marginTop="16dp" />
 
         <CheckBox android:id="@+id/cbSymptomActivity"
+            android:theme="@style/checkBoxStyle"
             android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -11,8 +11,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clickable="true"
+        android:gravity="center_horizontal"
         android:focusableInTouchMode="true"
         tools:context=".AgeActivity">
 
@@ -31,7 +32,7 @@
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/gender"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -62,7 +63,7 @@
             android:textIsSelectable="true" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/question1"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -70,7 +71,7 @@
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/reoccur"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -85,7 +86,7 @@
         </RadioGroup>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/question2"
             android:textAppearance="?android:attr/textAppearanceLarge"

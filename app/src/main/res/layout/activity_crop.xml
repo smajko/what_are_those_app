@@ -10,8 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/content_padding">
+        android:padding="@dimen/content_padding_half">
 
         <TextView
             android:id="@+id/title"
@@ -37,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/content_padding_half"
+            android:text="@string/cropAbove"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="@string/cropAbove"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/Button_crop"
@@ -49,17 +50,6 @@
             android:layout_marginTop="@dimen/content_padding_half"
             android:minWidth="120dp"
             android:text="@string/crop_button"
-            android:textColor="#33B5E5"
-            android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/Button_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/content_padding_half"
-            android:minWidth="120dp"
-            android:text="@string/done_button"
             android:textColor="#33B5E5"
             android:textSize="20sp"/>
 
@@ -73,11 +63,21 @@
             android:textStyle="bold"
             android:text="@string/cropBelow"/>
 
+        <Button
+            android:id="@+id/Button_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/content_padding_half"
+            android:minWidth="120dp"
+            android:text="@string/done_button"
+            android:textColor="#33B5E5"
+            android:textSize="20sp"/>
+
         <ImageView
             android:id="@+id/croppedImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_padding_half"
             android:adjustViewBounds="true"
             android:contentDescription="croppedImageDesc"
             android:scaleType="centerInside"/>

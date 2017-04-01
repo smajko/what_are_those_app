@@ -3,7 +3,12 @@
     <style name="CustomTheme" parent="MaterialDrawerTheme">
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">#E91E63</item>
+        <item name="colorAccent">#42A5F5</item>
+    </style>
+
+    <style name="checkBoxStyle" parent="MaterialDrawerTheme">
+        <item name="colorAccent">#40E42F</item>
+        <!--<item name="android:textColorSecondary">#CDDC39</item>-->
     </style>
 
 </resources>
