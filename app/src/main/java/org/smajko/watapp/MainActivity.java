@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 
 		verifyStoragePermissions(this);
 
-		Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+		Intent intent = new Intent(MainActivity.this, IntroScreen.class);
 		startActivityForResult(intent, INTRO_RESULT_CODE);
 
 		setContentView(R.layout.activity_main);
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 		btnCameraActivity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, CropActivity.class);
+				Intent intent = new Intent(MainActivity.this, CropScreen.class);
 				startActivityForResult(intent, CAMERA_RESULT_CODE);
 			}
 		});
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 		final Button btnAgeActivity = (Button) findViewById(R.id.btnAgeActivity);
 		btnAgeActivity.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, AgeActivity.class);
+				Intent intent = new Intent(MainActivity.this, AgeScreen.class);
 				startActivityForResult(intent, INFO_RESULT_CODE);
 			}
 		});
@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
 		btnSymptomActivity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, SymptomActivity.class);
+				Intent intent = new Intent(MainActivity.this, SymptomScreen.class);
 				startActivityForResult(intent, SYMPTOM_RESULT_CODE);
 			}
 		});
@@ -163,7 +163,7 @@ public class MainActivity extends Activity {
 			 * 	   Start information activity after intro
 			 *************************************************/
 			case INTRO_RESULT_CODE:
-				intent = new Intent(MainActivity.this, AgeActivity.class);
+				intent = new Intent(MainActivity.this, AgeScreen.class);
 				startActivityForResult(intent, INFO_RESULT_CODE);
 				break;
 
@@ -197,12 +197,12 @@ public class MainActivity extends Activity {
 			case PERMISSION_RESULT_CODE:
 				/** Start camera crop activity after permitted **/
 				if (resultCode == RESULT_OK){
-					intent = new Intent(MainActivity.this, CropActivity.class);
+					intent = new Intent(MainActivity.this, CropScreen.class);
 					startActivityForResult(intent, CAMERA_RESULT_CODE);
 				}
 				/** Start symptom activity after not permitted **/
 				else {
-					intent = new Intent(MainActivity.this, SymptomActivity.class);
+					intent = new Intent(MainActivity.this, SymptomScreen.class);
 					intent.putExtra("start",start);
 					startActivityForResult(intent, SYMPTOM_RESULT_CODE);
 				}
@@ -220,7 +220,7 @@ public class MainActivity extends Activity {
 				}
 				/** On app start, automatically start symptom activity after writing results **/
 				if (start) {
-					intent = new Intent(MainActivity.this, SymptomActivity.class);
+					intent = new Intent(MainActivity.this, SymptomScreen.class);
 					intent.putExtra("start",start);
 					startActivityForResult(intent, SYMPTOM_RESULT_CODE);
 				}

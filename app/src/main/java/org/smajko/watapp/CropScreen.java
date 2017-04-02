@@ -13,17 +13,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.edmodo.cropper.CropImageView;
 
@@ -31,7 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 
-public class CropActivity extends Activity {
+public class CropScreen extends Activity {
     private static final int GUIDELINES_ON_TOUCH = 1;
     private Uri fileUri; // file URI to store image/video
     private String outputFilePath;
@@ -147,7 +139,7 @@ public class CropActivity extends Activity {
             setResult(RESULT_OK, intent);
         } else {
             setResult(RESULT_CANCELED, intent);
-            Toast.makeText(CropActivity.this, "Picture not cropped!",
+            Toast.makeText(CropScreen.this, "Picture not cropped!",
                     Toast.LENGTH_LONG).show();
         }
         finish();
@@ -182,7 +174,7 @@ public class CropActivity extends Activity {
             startActivityForResult(intent, 1);
 
         } else {
-            Toast.makeText(CropActivity.this, "Camera not found!",
+            Toast.makeText(CropScreen.this, "Camera not found!",
                     Toast.LENGTH_LONG).show();
             finish();
         }

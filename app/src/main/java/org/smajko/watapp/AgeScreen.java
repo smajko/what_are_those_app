@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class AgeActivity extends Activity {
+public class AgeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,15 +73,15 @@ public class AgeActivity extends Activity {
         Intent intent = new Intent();
 
         if (checkEmpty.matches("")){
-            Toast.makeText(AgeActivity.this, "Age not set!",
+            Toast.makeText(AgeScreen.this, "Age not set!",
                     Toast.LENGTH_LONG).show();
             setResult(RESULT_CANCELED, intent);
         } else if (rg.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(AgeActivity.this, "Gender not selected!",
+            Toast.makeText(AgeScreen.this, "Gender not selected!",
                     Toast.LENGTH_LONG).show();
             setResult(RESULT_CANCELED, intent);
         } else if (rg2.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(AgeActivity.this, "Recurrence not selected!",
+            Toast.makeText(AgeScreen.this, "Recurrence not selected!",
                     Toast.LENGTH_LONG).show();
             setResult(RESULT_CANCELED, intent);
         } else {

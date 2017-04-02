@@ -22,17 +22,17 @@
         </activity>
 
         <activity
-            android:name="org.smajko.watapp.IntroActivity"
+            android:name="org.smajko.watapp.IntroScreen"
             android:label="@string/app_intro" >
         </activity>
 
         <activity
-            android:name="org.smajko.watapp.AgeActivity"
+            android:name="org.smajko.watapp.AgeScreen"
             android:label="@string/age_title" >
         </activity>
 
         <activity
-            android:name="org.smajko.watapp.SymptomActivity"
+            android:name="org.smajko.watapp.SymptomScreen"
             android:label="@string/symptom_title" >
         </activity>
 
@@ -42,7 +42,7 @@
         </activity>
 
         <activity
-            android:name="org.smajko.watapp.CropActivity"
+            android:name="org.smajko.watapp.CropScreen"
             android:label="@string/crop_title" >
         </activity>
     </application>

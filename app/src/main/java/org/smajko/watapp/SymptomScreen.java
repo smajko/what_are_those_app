@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
-public class SymptomActivity extends Activity {
+public class SymptomScreen extends Activity {
     CheckBox[] cbs = new CheckBox[8];
     String sb;
     String symptoms[] = {"Itchiness", "Redness", "Bumps", "Tenderness", "Hotness", "Burning", "Fever", "Sneezing"};
@@ -59,7 +59,7 @@ public class SymptomActivity extends Activity {
             intent.putExtra("symptoms",sb);
             setResult(RESULT_OK, intent);
         } else {
-            Toast.makeText(SymptomActivity.this, "No symptoms selected!",
+            Toast.makeText(SymptomScreen.this, "No symptoms selected!",
                     Toast.LENGTH_LONG).show();
             setResult(RESULT_CANCELED, intent);
         }
