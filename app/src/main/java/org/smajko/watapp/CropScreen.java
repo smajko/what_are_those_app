@@ -24,7 +24,6 @@ import java.io.FileOutputStream;
 
 
 public class CropScreen extends Activity {
-    private static final int GUIDELINES_ON_TOUCH = 1;
     private Uri fileUri; // file URI to store image/video
     private String outputFilePath;
     boolean cropped;

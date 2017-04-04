@@ -45,6 +45,11 @@
             android:name="org.smajko.watapp.CropScreen"
             android:label="@string/crop_title" >
         </activity>
+
+        <activity
+            android:name="org.smajko.watapp.ListResults" >
+        </activity>
+
     </application>
 
 </manifest>

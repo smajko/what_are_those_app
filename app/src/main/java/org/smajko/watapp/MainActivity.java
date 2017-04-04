@@ -70,7 +70,8 @@ public class MainActivity extends Activity {
 
 		verifyStoragePermissions(this);
 
-		Intent intent = new Intent(MainActivity.this, IntroScreen.class);
+		Intent intent = new Intent(MainActivity.this, ListResults.class);
+		//Intent intent = new Intent(MainActivity.this, IntroScreen.class);
 		startActivityForResult(intent, INTRO_RESULT_CODE);
 
 		setContentView(R.layout.activity_main);
