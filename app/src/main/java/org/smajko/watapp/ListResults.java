@@ -16,11 +16,17 @@ public class ListResults extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        //new AsyncCaller().execute();
+        ArrayList<String> conditions = new ArrayList<String>();
+        conditions = (ArrayList<String>)getIntent().getStringArrayListExtra("conditions");
         List<Result> resultList = new ArrayList<>();
-        Result example = new Result("foo","bar",R.drawable.ic_launcher);
-        resultList.add(example);
-        resultList.add(example);
+        //Result example = new Result("foo","bar",R.drawable.ic_launcher);
+        //resultList.add(example);
+        //resultList.add(example);
+        for (int i = 0; i < conditions.size(); i++)
+        {
+            Result example = new Result(conditions.get(i),"description", R.drawable.ic_launcher);
+            resultList.add(example);
+        }
 
         ListView listView = (ListView)findViewById(android.R.id.list);
         ResultAdapter resultAdapter = new ResultAdapter(this, R.layout.result_view, resultList);
@@ -49,12 +55,6 @@ public class ListResults extends Activity {
                         TO BE IMPLEMENTED
 
              RequestParams params = new RequestParams();
-
-             params.put("symptoms", symptoms);
-             params.put("gender", gender);
-             params.put("age",age);
-             params.put("days",days);
-             params.put("reoccurring",reoccurring);
 
              try {
              outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";

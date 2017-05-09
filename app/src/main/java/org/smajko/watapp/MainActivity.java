@@ -15,10 +15,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends Activity {
 
 	private Uri fileUri; // file URI to store image/video
 	private String outputFilePath;
+	ArrayList<String> conditions;
 
 	static final int CAMERA_RESULT_CODE = 1;
 	static final int INFO_RESULT_CODE = 2;
@@ -108,18 +112,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, ListResults.class);
+				intent.putStringArrayListExtra("conditions",(ArrayList<String>)conditions);
 				startActivity(intent);
 				/***************************************************************
 				 *                    TO BE IMPLEMENTED
 				 *
 
 				 RequestParams params = new RequestParams();
-
-				 params.put("symptoms", symptoms);
-				 params.put("gender", gender);
-				 params.put("age",age);
-				 params.put("days",days);
-				 params.put("reoccurring",reoccurring);
 
 				 try {
 				 	outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
@@ -236,8 +235,8 @@ public class MainActivity extends Activity {
 					cb3.setChecked(true);
 					tv3.setTextColor(Color.parseColor("#40E42F"));
 
-					Intent extras = this.getIntent();
-					symptoms = extras.getStringExtra("symptoms");
+					conditions = (ArrayList<String>)data.getStringArrayListExtra("conditions");
+					System.out.println(conditions.size());
 				}
 				if (start) {
 					start = false;
