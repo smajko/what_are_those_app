@@ -70,8 +70,7 @@ public class MainActivity extends Activity {
 
 		verifyStoragePermissions(this);
 
-		Intent intent = new Intent(MainActivity.this, ListResults.class);
-		//Intent intent = new Intent(MainActivity.this, IntroScreen.class);
+		Intent intent = new Intent(MainActivity.this, IntroScreen.class);
 		startActivityForResult(intent, INTRO_RESULT_CODE);
 
 		setContentView(R.layout.activity_main);
@@ -108,8 +107,8 @@ public class MainActivity extends Activity {
 		btnResults.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(MainActivity.this, "Endpoint not implemented",
-						Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(MainActivity.this, ListResults.class);
+				startActivity(intent);
 				/***************************************************************
 				 *                    TO BE IMPLEMENTED
 				 *
