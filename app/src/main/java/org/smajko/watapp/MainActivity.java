@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -114,45 +115,9 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(MainActivity.this, ListResults.class);
 				intent.putStringArrayListExtra("conditions",(ArrayList<String>)conditions);
 				startActivity(intent);
-				/***************************************************************
-				 *                    TO BE IMPLEMENTED
-				 *
-
-				 RequestParams params = new RequestParams();
-
-				 try {
-				 	outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
-				 	File myFile = new File(outputFilePath);
-				 	params.put("picture", myFile);
-				 } catch(FileNotFoundException e) {}
-
-				 HttpUtils.post(AppConstant.URL_FEED, params, new JsonHttpResponseHandler() {
-					@Override
-					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-						// If the response is JSONObject instead of expected JSONArray
-						Log.d("res", "---------------- response : " + response);
-						try {
-							JSONObject serverResp = new JSONObject(response.toString());
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-					@Override
-					public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-						// Pull out the first event on the public timeline
-					}
-				});
-
-				 *
-				 *
-				 *****************************************************************/
 			}
 		});
 	}
-
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -162,8 +127,12 @@ public class MainActivity extends Activity {
 			 * 	   Start information activity after intro
 			 *************************************************/
 			case INTRO_RESULT_CODE:
-				intent = new Intent(MainActivity.this, AgeScreen.class);
-				startActivityForResult(intent, INFO_RESULT_CODE);
+				if (resultCode == RESULT_CANCELED)
+					finish();
+				else {
+					intent = new Intent(MainActivity.this, AgeScreen.class);
+					startActivityForResult(intent, INFO_RESULT_CODE);
+				}
 				break;
 
 			/*************************************************

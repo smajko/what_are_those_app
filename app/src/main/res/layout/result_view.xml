@@ -4,8 +4,9 @@
     android:orientation="vertical">
 
     <TextView android:id="@+id/name"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#ffff00"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -14,24 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--<HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/content_padding" >
+    <TextView android:id="@+id/percent"
+        android:textSize="16sp"
+        android:textColor="#ff0000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/pictures"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp" >
-        </LinearLayout>
-
-    </HorizontalScrollView>-->
-    <ImageView android:id="@+id/picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="imageDesc" />
 
 </LinearLayout>

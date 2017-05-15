@@ -33,7 +33,7 @@ public class ResultAdapter extends ArrayAdapter<Result> {
         if (result != null) {
             TextView name = (TextView) view.findViewById(R.id.name);
             TextView description = (TextView) view.findViewById(R.id.description);
-            ImageView picture = (ImageView) view.findViewById(R.id.picture);
+            TextView percent = (TextView) view.findViewById(R.id.percent);
 
             if (name != null) {
                 name.setText(result.name);
@@ -43,8 +43,8 @@ public class ResultAdapter extends ArrayAdapter<Result> {
                 description.setText(result.description);
             }
 
-            if (picture != null) {
-                picture.setImageResource(result.picture);
+            if (percent != null) {
+                percent.setText(result.percent);
             }
         }
 

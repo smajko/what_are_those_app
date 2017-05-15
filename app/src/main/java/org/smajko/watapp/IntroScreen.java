@@ -1,5 +1,8 @@
 package org.smajko.watapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +16,6 @@ public class IntroScreen extends AppIntro {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Add your slide fragments here.
-        //addSlide(firstFragment);
-        //addSlide(secondFragment);
-        //addSlide(thirdFragment);
-        //addSlide(fourthFragment);
 
         addSlide(AppIntroFragment.newInstance("Welcome to WatApp", "Symptom checker made easy and intuitive", R.drawable.ic_screen1, Color.TRANSPARENT));
         addSlide(AppIntroFragment.newInstance("Having symptoms but don't know what they mean?", "Just give us some information, and we will try to give an accurate diagnosis", R.drawable.ic_screen1, Color.TRANSPARENT));
@@ -26,6 +24,36 @@ public class IntroScreen extends AppIntro {
         // Override bar/separator color.
         setBarColor(Color.parseColor("#000000"));
         setSeparatorColor(Color.parseColor("#000000"));
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Disclaimer");
+        builder.setMessage("By pressing Accept, you acknowledge and accept the following:\n\n" +
+                "1) The information contained in this application is for entertainment purposes only.\n\n" +
+                "2) WatApp is in no way affiliated with any medical authority.\n\n" +
+                "3) WatApp is not to be used for factual diagnosis. Seek the advice of your physician or other qualified health care provider for actual diagnosis.\n\n" +
+                "4) We are not liable in any way for misleading information.");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton(
+                "Accept",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder.setNegativeButton(
+                "Decline",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent();
+                        setResult(RESULT_CANCELED,intent);
+                        finish();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -43,6 +71,6 @@ public class IntroScreen extends AppIntro {
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
-        // Do something when the slide changes.
+        // prototype
     }
 }
