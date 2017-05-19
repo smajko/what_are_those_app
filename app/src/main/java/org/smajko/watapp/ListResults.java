@@ -4,46 +4,143 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.ListView;
+import android.util.Log;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
+
 
 public class ListResults extends Activity {
+    private String outputFilePath;
+    JSONObject serverResp;
+    ArrayList<String> conditions = new ArrayList<String>();
+    Map<String, String> dictionary = new HashMap<String, String>();
+    Map<String, String> dictionary2 = new HashMap<String, String>();
+    String current[] = new String[10];
+    List<Result> resultList = new ArrayList<>();
+
+    boolean request = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-
-        Map<String, String> dictionary = new HashMap<String, String>();
 
         dictionary.put("Acne","Acne, or acne vulgaris, is a skin problem that starts when oil and dead skin cells clog up your pores.");
         dictionary.put("Hives","Urticaria, also known as hives, is an outbreak of swollen, pale red bumps or plaques (wheals) on the skin that appear suddenly -- either as a result of the body's reaction to certain allergens, or for unknown reasons.");
         dictionary.put("Shingles","Shingles is a painful skin rash. It is caused by the varicella zoster virus. Shingles usually appears in a band, a strip, or a small area on one side of the face or body.");
         dictionary.put("Chicken pox","Chickenpox (varicella) is a contagious illness that causes an itchy rash and red spots or blisters (pox) all over the body. ");
         dictionary.put("Melanoma","Melanoma, the most serious type of skin cancer, develops in the cells (melanocytes) that produce melanin — the pigment that gives your skin its color. Melanoma can also form in your eyes and, rarely, in internal organs, such as your intestines.");
-        dictionary.put("Cold sore","Cold sores, sometimes called fever blisters, are groups of small blisters on the lip and around the mouth. The skin around the blisters is often red, swollen, and sore.");
+        dictionary.put("Ingrown Hair","Ingrown hairs are hairs that have curled around and grown back into your skin instead of rising up from it. Sometimes, dead skin can clog up a hair follicle. That forces the hair inside it to grow sideways under the skin, rather than upward and outward.");
         dictionary.put("Warts","A wart is a skin growth caused by some types of the virus called the human papillomavirus (HPV). HPV infects the top layer of skin, usually entering the body in an area of broken skin. The virus causes the top layer of skin to grow rapidly, forming a wart.");
         dictionary.put("Poison Ivy Rash","Poison ivy is a plant that can cause a red, itchy rash called allergic contact dermatitis. It is the most common skin problem caused by contact with plants.");
         dictionary.put("Scabies","Scabies is not an infection, but an infestation. Tiny mites called Sarcoptes scabiei set up shop in the outer layers of human skin. The skin does not take kindly to the invasion. As the mites burrow and lay eggs inside the skin, the infestation leads to relentless itching and an angry rash.");
 
-        ArrayList<String> conditions = new ArrayList<String>();
+        dictionary2.put("Acne","acne");
+        dictionary2.put("Hives","hives");
+        dictionary2.put("Shingles","herpes");
+        dictionary2.put("Chicken pox","varicella");
+        dictionary2.put("Melanoma","melanoma");
+        dictionary2.put("Ingrown Hair","ingrown_hair");
+        dictionary2.put("Warts","warts");
+        dictionary2.put("Poison Ivy Rash","poison_ivy");
+        dictionary2.put("Scabies","scabies");
+
         conditions = (ArrayList<String>)getIntent().getStringArrayListExtra("conditions");
-        List<Result> resultList = new ArrayList<>();
         String percent = "Percentage: ";
 
-        for (int i = 0; i < conditions.size(); i++)
+        for (int i = 0; i < 10; i++)
+            current[i] = "";
+
+        RequestParams params = new RequestParams();
+        //new AsyncCaller().execute();
+
+        try {
+            outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
+            File myFile = new File(outputFilePath);
+            params.put("picture", myFile);
+        } catch(FileNotFoundException e) {}
+
+
+        HttpUtils.post("calculate", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                // If the response is JSONObject instead of expected JSONArray
+                try {
+                    serverResp = new JSONObject(response.toString());
+                    //serverResp2 = response;
+                    Log.d("ListResults", "onSuccess Obj: " + response.getString("acne"));
+                    for (int i = 0; i < conditions.size(); i++)
+                    {
+                        String fullpercent = "Photo analysis: ";
+                        try { current[i] = response.getString(dictionary2.get(conditions.get(i))); }
+                        catch (JSONException e) { fullpercent += "n/a"; }
+                        float result = Float.parseFloat(current[i]);
+                        result *= 100;
+                        String resultString = String.format("%.2f",result);
+                        Log.d("ListResults",resultString);
+                        fullpercent += resultString;
+                        fullpercent += "%";
+                        Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                        resultList.add(example);
+                    }
+                    ListView listView = (ListView)findViewById(android.R.id.list);
+                    ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                    listView.setAdapter(resultAdapter);
+
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                String respArray = timeline.toString();
+                Log.d("ListResults", "onSuccess Array: " + respArray.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                String respString = responseString.toString();
+                Log.d("ListResults", "onFailure response String: " + respString);
+                for (int i = 0; i < conditions.size(); i++)
+                {
+                    String fullpercent = "Photo analysis: n/a";
+
+                    Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                    resultList.add(example);
+                }
+                ListView listView = (ListView)findViewById(android.R.id.list);
+                ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                listView.setAdapter(resultAdapter);
+            }
+        });
+
+        /*for (int i = 0; i < conditions.size(); i++)
         {
-            Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), percent);
+            Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), current[i]);
             resultList.add(example);
         }
 
         ListView listView = (ListView)findViewById(android.R.id.list);
         ResultAdapter resultAdapter = new ResultAdapter(this, R.layout.result_view, resultList);
-        listView.setAdapter(resultAdapter);
+        listView.setAdapter(resultAdapter);*/
     }
 
     /**********************************************************************
@@ -64,37 +161,39 @@ public class ListResults extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            /**
-                        TO BE IMPLEMENTED
+            RequestParams params2 = new RequestParams();
 
-             RequestParams params = new RequestParams();
+            try {
+                outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
+                File myFile = new File(outputFilePath);
+                params2.put("picture", myFile);
+            } catch(FileNotFoundException e) {}
 
-             try {
-             outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
-             File myFile = new File(outputFilePath);
-             params.put("picture", myFile);
-             } catch(FileNotFoundException e) {}
-
-             HttpUtils.post(AppConstant.URL_FEED, params, new JsonHttpResponseHandler() {
+             HttpUtils.post("dummy", params2, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-            // If the response is JSONObject instead of expected JSONArray
-            Log.d("res", "---------------- response : " + response);
-            try {
-            JSONObject serverResp = new JSONObject(response.toString());
-            } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            }
+                // If the response is JSONObject instead of expected JSONArray
+                try {
+                    JSONObject serverResp = new JSONObject(response.toString());
+                    Log.d("ListResults", "onSuccess Obj: " + response.getString("acne"));
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-            // Pull out the first event on the public timeline
+                String respArray = timeline.toString();
+                Log.d("ListResults", "onSuccess Array: " + respArray.toString());
             }
-            });
 
-             **/
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                String respString = responseString.toString();
+                Log.d("ListResults", "onFailure response String: " + respString);
+            }
+        });
 
 
             return null;
@@ -105,9 +204,9 @@ public class ListResults extends Activity {
             super.onPostExecute(result);
 
             //list results
-
-            pdLoading.dismiss();
+            if (pdLoading.isShowing()) {
+                pdLoading.dismiss();
+            }
         }
-
     }
 }

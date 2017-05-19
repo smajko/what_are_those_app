@@ -8,13 +8,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Button;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
 
 public class SymptomScreen extends Activity {
     CheckBox cb;
@@ -34,12 +30,12 @@ public class SymptomScreen extends Activity {
     String shingles[] = new String[] {"burning", "tingling", "numbness", "sensitive", "itchiness"};
     String chickenpox[] = new String[] {"redness", "itchiness", "bumps", "scabs", "fever"};
     String skincancer[] = new String[] {"brown", "mole", "lesion", "irregular-shape"};
-    String coldsore[] = new String[] {"sore", "fever", "swelling", "redness"};
+    String ingrownhair[] = new String[] {"sore", "bumps", "itchiness", "pain", "lesion"};
     String wart[] = new String[] {"grainy", "fleshy", "white", "pink", "tan"};
     String poisonivyrash[] = new String[] {"redness", "itchiness", "swelling", "blister"};
     String scabies[] = new String[] {"itchiness", "blister", "scales", "sores", "redness"};
-    String[][] conditions = {acne, hives, shingles, chickenpox, skincancer, coldsore, wart, poisonivyrash, scabies};
-    String[] conditionNames = {"Acne", "Hives", "Shingles", "Chicken pox", "Melanoma", "Cold sore", "Warts", "Poison Ivy Rash", "Scabies"};
+    String[][] conditions = {acne, hives, shingles, chickenpox, skincancer, ingrownhair, wart, poisonivyrash, scabies};
+    String[] conditionNames = {"Acne", "Hives", "Shingles", "Chicken pox", "Melanoma", "Ingrown Hair", "Warts", "Poison Ivy Rash", "Scabies"};
 
     ArrayList<Integer> conditionIndex = new ArrayList<Integer>();
     ArrayList<String> current = new ArrayList<String>();

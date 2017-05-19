@@ -59,11 +59,15 @@ public class IntroScreen extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
         finish();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
         super.onDonePressed(currentFragment);
         finish();
     }
