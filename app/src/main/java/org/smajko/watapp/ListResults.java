@@ -2,11 +2,14 @@ package org.smajko.watapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.ListView;
 import android.util.Log;
+import android.util.Base64;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -15,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -70,11 +74,15 @@ public class ListResults extends Activity {
         RequestParams params = new RequestParams();
         //new AsyncCaller().execute();
 
-        try {
             outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
             File myFile = new File(outputFilePath);
-            params.put("picture", myFile);
-        } catch(FileNotFoundException e) {}
+            Bitmap bitmapOrg = BitmapFactory.decodeFile(myFile.getAbsolutePath());
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+            byte [] ba = bao.toByteArray();
+            String ba1=Base64.encodeToString(ba,Base64.DEFAULT);
+
+        params.put("picture", ba1);
 
 
         HttpUtils.post("calculate", params, new JsonHttpResponseHandler() {
@@ -84,7 +92,6 @@ public class ListResults extends Activity {
                 try {
                     serverResp = new JSONObject(response.toString());
                     //serverResp2 = response;
-                    Log.d("ListResults", "onSuccess Obj: " + response.getString("acne"));
                     for (int i = 0; i < conditions.size(); i++)
                     {
                         String fullpercent = "Photo analysis: ";
@@ -117,8 +124,25 @@ public class ListResults extends Activity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                String respString = responseString.toString();
-                Log.d("ListResults", "onFailure response String: " + respString);
+                //super.onFailure(statusCode, headers, responseString, throwable);
+                //String respString = responseString.toString();
+                Log.d("ListResults", "onFailure response String: " + responseString);
+                for (int i = 0; i < conditions.size(); i++)
+                {
+                    String fullpercent = "Photo analysis: n/a";
+
+                    Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                    resultList.add(example);
+                }
+                ListView listView = (ListView)findViewById(android.R.id.list);
+                ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                listView.setAdapter(resultAdapter);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                //String respString = response.toString();
+                //Log.d("ListResults", "onFailure response String: " + respString);
                 for (int i = 0; i < conditions.size(); i++)
                 {
                     String fullpercent = "Photo analysis: n/a";
@@ -132,15 +156,6 @@ public class ListResults extends Activity {
             }
         });
 
-        /*for (int i = 0; i < conditions.size(); i++)
-        {
-            Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), current[i]);
-            resultList.add(example);
-        }
-
-        ListView listView = (ListView)findViewById(android.R.id.list);
-        ResultAdapter resultAdapter = new ResultAdapter(this, R.layout.result_view, resultList);
-        listView.setAdapter(resultAdapter);*/
     }
 
     /**********************************************************************
