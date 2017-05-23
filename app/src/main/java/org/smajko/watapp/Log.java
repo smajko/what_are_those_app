@@ -9,8 +9,6 @@ public class Log {
 
     private static StringBuffer sb = new StringBuffer();
 
-
-
     public static void i(String tag, String msg){
 
         android.util.Log.i(tag, msg);
@@ -40,7 +38,7 @@ public class Log {
 
         try{
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            File file = new File(extStorageDirectory + File.separator + "TurnToTechLog.txt");
+            File file = new File(extStorageDirectory + File.separator + "Log.txt");
             if(!file.exists())file.createNewFile();
             FileWriter fw = new FileWriter(file, true);
             fw.write(text);

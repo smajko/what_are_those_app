@@ -91,8 +91,6 @@ public class CropScreen extends Activity {
                     Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                             bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-
-                    //Bitmap bitmap = BitmapFactory.decodeFile(path);
                     cropImageView.setImageBitmap(rotatedBitmap);
 
                 } catch (Exception e) {

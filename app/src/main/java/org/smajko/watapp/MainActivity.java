@@ -9,15 +9,12 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompatSideChannelService;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -36,7 +33,6 @@ public class MainActivity extends Activity {
 	/********************************
 	 * 	  Params for json request
 	 ********************************/
-	String symptoms;
 	String gender;
 	int age;
 	int days;

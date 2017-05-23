@@ -20,14 +20,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
-
 
 public class ListResults extends Activity {
     private String outputFilePath;
@@ -81,9 +79,12 @@ public class ListResults extends Activity {
             bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, bao);
             byte [] ba = bao.toByteArray();
             String ba1=Base64.encodeToString(ba,Base64.DEFAULT);
+            Log.d("ListResults", "size: " + ba1.getBytes().length);
+
 
         params.put("picture", ba1);
-
+        //send as json string
+        params.setUseJsonStreamer(true);
 
         HttpUtils.post("calculate", params, new JsonHttpResponseHandler() {
             @Override
@@ -176,41 +177,86 @@ public class ListResults extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            RequestParams params2 = new RequestParams();
+            RequestParams rparams = new RequestParams();
 
-            try {
-                outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
-                File myFile = new File(outputFilePath);
-                params2.put("picture", myFile);
-            } catch(FileNotFoundException e) {}
+            //convert png file to base64 encoded string
+            outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myimage.png";
+            File myFile = new File(outputFilePath);
+            Bitmap bitmapOrg = BitmapFactory.decodeFile(myFile.getAbsolutePath());
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+            byte [] ba = bao.toByteArray();
+            String ba1=Base64.encodeToString(ba,Base64.DEFAULT);
 
-             HttpUtils.post("dummy", params2, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // If the response is JSONObject instead of expected JSONArray
-                try {
-                    JSONObject serverResp = new JSONObject(response.toString());
-                    Log.d("ListResults", "onSuccess Obj: " + response.getString("acne"));
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+            rparams.put("picture", ba1);
+
+            HttpUtils.post("calculate", rparams, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    // If the response is JSONObject instead of expected JSONArray
+                    try {
+                        serverResp = new JSONObject(response.toString());
+                        for (int i = 0; i < conditions.size(); i++)
+                        {
+                            String fullpercent = "Photo analysis: ";
+                            try { current[i] = response.getString(dictionary2.get(conditions.get(i))); }
+                            catch (JSONException e) { fullpercent += "n/a"; }
+                            float result = Float.parseFloat(current[i]);
+                            result *= 100;
+                            String resultString = String.format("%.2f",result);
+                            Log.d("ListResults",resultString);
+                            fullpercent += resultString;
+                            fullpercent += "%";
+                            Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                            resultList.add(example);
+                        }
+                        ListView listView = (ListView)findViewById(android.R.id.list);
+                        ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                        listView.setAdapter(resultAdapter);
+
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                String respArray = timeline.toString();
-                Log.d("ListResults", "onSuccess Array: " + respArray.toString());
-            }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                    String respArray = timeline.toString();
+                    Log.d("ListResults", "onSuccess Array: " + respArray);
+                }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                String respString = responseString.toString();
-                Log.d("ListResults", "onFailure response String: " + respString);
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    Log.d("ListResults", "onFailure response String: " + responseString);
+                    for (int i = 0; i < conditions.size(); i++)
+                    {
+                        String fullpercent = "Photo analysis: n/a";
 
+                        Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                        resultList.add(example);
+                    }
+                    ListView listView = (ListView)findViewById(android.R.id.list);
+                    ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                    listView.setAdapter(resultAdapter);
+                }
 
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                    String respString = response.toString();
+                    Log.d("ListResults", "onFailure response String: " + respString);
+                    for (int i = 0; i < conditions.size(); i++)
+                    {
+                        String fullpercent = "Photo analysis: n/a";
+
+                        Result example = new Result(conditions.get(i),dictionary.get(conditions.get(i)), fullpercent);
+                        resultList.add(example);
+                    }
+                    ListView listView = (ListView)findViewById(android.R.id.list);
+                    ResultAdapter resultAdapter = new ResultAdapter(getApplicationContext(), R.layout.result_view, resultList);
+                    listView.setAdapter(resultAdapter);
+                }
+            });
             return null;
         }
 
@@ -218,7 +264,6 @@ public class ListResults extends Activity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            //list results
             if (pdLoading.isShowing()) {
                 pdLoading.dismiss();
             }
