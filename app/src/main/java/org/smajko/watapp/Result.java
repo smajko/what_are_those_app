@@ -1,5 +1,9 @@
 package org.smajko.watapp;
 
+/*************************************
+ *  Final result to display to user
+ ************************************/
+
 public class Result {
     public String name;
     public String description;

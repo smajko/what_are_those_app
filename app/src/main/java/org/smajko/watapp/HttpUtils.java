@@ -12,7 +12,7 @@ public class HttpUtils {
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.setTimeout(180000);
+        client.setTimeout(20000);
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 

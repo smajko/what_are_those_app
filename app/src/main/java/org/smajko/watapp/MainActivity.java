@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -18,8 +17,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-	private Uri fileUri; // file URI to store image/video
-	private String outputFilePath;
 	ArrayList<String> conditions;
 
 	static final int CAMERA_RESULT_CODE = 1;
@@ -37,6 +34,7 @@ public class MainActivity extends Activity {
 	int age;
 	int days;
 	boolean reoccurring;
+	boolean took_picture;
 
 	/********************************
 	 * Storage Permission (for API 23+)
@@ -70,6 +68,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		verifyStoragePermissions(this);
+		took_picture = false;
 
 		Intent intent = new Intent(MainActivity.this, IntroScreen.class);
 		startActivityForResult(intent, INTRO_RESULT_CODE);
@@ -110,6 +109,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, ListResults.class);
 				intent.putStringArrayListExtra("conditions",(ArrayList<String>)conditions);
+				intent.putExtra("took_picture",took_picture);
 				startActivity(intent);
 			}
 		});
@@ -177,6 +177,7 @@ public class MainActivity extends Activity {
 			 *************************************************/
 			case CAMERA_RESULT_CODE:
 				if (resultCode == RESULT_OK) {
+					took_picture = true;
 					final CheckBox cb1 = (CheckBox) findViewById(R.id.cbCameraActivity);
 					final TextView tv1 = (TextView) findViewById(R.id.tvCameraActivity);
 					cb1.setChecked(true);

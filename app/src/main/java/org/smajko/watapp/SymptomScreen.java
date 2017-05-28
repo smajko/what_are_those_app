@@ -66,6 +66,7 @@ public class SymptomScreen extends Activity {
             conditionIndex.add(z);
         }
 
+        //set onclick listener for every box to disable/enable other possible symptoms
         for (int i = 0; i < checkboxes.length; i++)
         {
             for (int j = 0; j < checkboxes[i].length; j++)
@@ -94,6 +95,7 @@ public class SymptomScreen extends Activity {
         }
     }
 
+    //check for possible conditions, enable checkbox for all symptoms the condition has
     private void update(){
         for (int i = 0 ; i < checkboxes.length; i++)
         {
@@ -121,6 +123,7 @@ public class SymptomScreen extends Activity {
         }
     }
 
+    //check each symptom to see if condition is possible
     private boolean validate(String[] arg)
     {
         boolean valid;
@@ -159,6 +162,7 @@ public class SymptomScreen extends Activity {
         }
     }
 
+    //set result as all possible conditions
     private void setResult(){
         Intent intent = new Intent();
         if (counter > 0){
