@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	int days;
 	boolean reoccurring;
 	boolean took_picture;
+	boolean chose_symptoms;
 
 	/********************************
 	 * Storage Permission (for API 23+)
@@ -69,6 +71,7 @@ public class MainActivity extends Activity {
 
 		verifyStoragePermissions(this);
 		took_picture = false;
+		chose_symptoms = false;
 
 		Intent intent = new Intent(MainActivity.this, IntroScreen.class);
 		startActivityForResult(intent, INTRO_RESULT_CODE);
@@ -107,10 +110,15 @@ public class MainActivity extends Activity {
 		btnResults.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, ListResults.class);
-				intent.putStringArrayListExtra("conditions",(ArrayList<String>)conditions);
-				intent.putExtra("took_picture",took_picture);
-				startActivity(intent);
+				if (!chose_symptoms){
+					Toast.makeText(MainActivity.this, "Please select at least 1 symptom!",
+							Toast.LENGTH_LONG).show();
+				} else {
+					Intent intent = new Intent(MainActivity.this, ListResults.class);
+					intent.putStringArrayListExtra("conditions",(ArrayList<String>)conditions);
+					intent.putExtra("took_picture",took_picture);
+					startActivity(intent);
+				}
 			}
 		});
 	}
@@ -200,6 +208,7 @@ public class MainActivity extends Activity {
 					final TextView tv3 = (TextView) findViewById(R.id.tvSymptomActivity);
 					cb3.setChecked(true);
 					tv3.setTextColor(Color.parseColor("#40E42F"));
+					chose_symptoms = true;
 
 					conditions = (ArrayList<String>)data.getStringArrayListExtra("conditions");
 					System.out.println(conditions.size());
